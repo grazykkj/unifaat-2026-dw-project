@@ -1,2 +1,2 @@
-Servidor node web rodando na porta 3000
+[2026-05-27T23:32:04.149Z] GET :: /courses
 [2026-05-27T23:35:47.714Z] GET :: /courses

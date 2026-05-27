@@ -52,6 +52,13 @@ export default function DocSwaggerController() {
                 }
             }
         }
+
+        if (json.components?.schemas) {
+            combined.components.schemas = {
+                ...combined.components.schemas,
+                ...json.components.schemas
+            };
+        }
     }
 
     return combined;

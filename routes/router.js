@@ -17,6 +17,7 @@ import fileUpload from 'express-fileupload';
 import swaggerUi from 'swagger-ui-express';
 import LoginController from '../app/Http/Controllers/LoginController.js';
 import AuthMiddleware from '../app/Http/Middlewares/AuthMiddleware.js';
+import LogMiddleware from '../app/Http/Middlewares/LogMiddleware.js';
 import SwaggerDoc from '../app/Http/SwaggerDoc.js';
 
 const router = Router();
@@ -71,16 +72,16 @@ router.use('/docs', swaggerUi.serve, swaggerUi.setup(SwaggerDoc()));
  */
 
 /** Login */
-router.post('/login', LoginController);
+router.post('/login', LogMiddleware, LoginController);
 
 /** Router para usuários */
-router.use("/users", AuthMiddleware, userRouter);
+router.use("/users", LogMiddleware, AuthMiddleware, userRouter);
 
 /** Router para endereços */
-router.use("/addresses", AuthMiddleware, addressRouter);
+router.use("/addresses", LogMiddleware, AuthMiddleware, addressRouter);
 
 /** Router para cursos */
-router.use("/courses", AuthMiddleware, courseRouter);
+router.use("/courses", LogMiddleware, AuthMiddleware, courseRouter);
 
 /**
  * Fallback 404 para requisições não encontradas
